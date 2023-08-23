@@ -75,11 +75,21 @@ const controlPagination = function (page) {
   gotPage(page);
 };
 
+const updateModelServings = function (servings) {
+  // updating the serving in state object
+};
+const controlServings = function (servings) {
+  model.updateServings(servings);
+
+  recipeView.render(model.state.recipe);
+};
+
 // controllSearchResults();
 
 // controlRecipes('5ed6604591c37cdc054bcc13');
 const init = function () {
   recipeView.addHandlerRender(controlRecipes);
+  recipeView.addHandlerUpdateServings(controlServings);
   searchView.addHandlerSearch(controlSearchResults);
   paginationView.addHandlerClick(controlPagination);
 };
