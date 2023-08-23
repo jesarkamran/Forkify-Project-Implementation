@@ -3,6 +3,7 @@ import * as model from './model.js';
 import recipeView from './views/recipeView.js';
 import searchView from './views/searchView.js';
 import resultsView from './views/resultsView.js';
+import paginationView from './views/paginationView.js';
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 
@@ -34,7 +35,17 @@ const controlRecipes = async function () {
   }
 };
 
-const controllSearchResults = async function () {
+const gotPage = function (page) {
+  // Rendering Search Results to the View
+  resultsView.render(model.serachResultsPerPage(page));
+
+  paginationView.render({
+    curr: model.state.search.page,
+    max: model.state.search.maxPages,
+  });
+};
+
+const controlSearchResults = async function () {
   try {
     // Getting Search Query
     const query = searchView.getQuery();
@@ -48,8 +59,8 @@ const controllSearchResults = async function () {
     // Loading Search Results from Model
     await model.loadSearchResults(query);
 
-    // Rendering Search Results to the View
-    resultsView.render(model.serachResultsPerPage());
+    console.log(`New Search ${model.state.search.page}`);
+    gotPage(model.state.search.page);
   } catch (e) {
     console.log(e);
 
@@ -58,11 +69,18 @@ const controllSearchResults = async function () {
   }
 };
 
+const controlPagination = function (page) {
+  model.state.search.page = page;
+  // Rendering Search Results to the View
+  gotPage(page);
+};
+
 // controllSearchResults();
 
 // controlRecipes('5ed6604591c37cdc054bcc13');
 const init = function () {
   recipeView.addHandlerRender(controlRecipes);
-  searchView.addHandlerSearch(controllSearchResults);
+  searchView.addHandlerSearch(controlSearchResults);
+  paginationView.addHandlerClick(controlPagination);
 };
 init();

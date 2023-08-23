@@ -9,6 +9,7 @@ export const state = {
     results: [],
     resultsPerPage: RES_PER_PAGE,
     page: 1,
+    maxPages: 0,
   },
 };
 
@@ -35,6 +36,7 @@ export const loadRecipe = async function (id) {
 export const loadSearchResults = async function (query) {
   try {
     state.search.query = query;
+    state.search.page = 1;
     const data = await getJSON(`${API_URL}?search=${query}`);
 
     console.log(data);
@@ -47,6 +49,10 @@ export const loadSearchResults = async function (query) {
         image: recipe.image_url,
       };
     });
+
+    state.search.maxPages = Math.round(
+      state.search.results.length / state.search.resultsPerPage
+    );
   } catch (error) {
     console.log(error);
     throw error;
