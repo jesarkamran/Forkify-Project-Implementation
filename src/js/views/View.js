@@ -12,6 +12,10 @@ export default class View {
   }
 
   render(data) {
+    if (this.isEmpty(data)) {
+      this.renderError(this._errorMessage);
+      return;
+    }
     this._data = data;
     this._clear();
     const markup = this._generateMarkup(this._data);
@@ -81,5 +85,12 @@ export default class View {
         `;
     this._clear();
     this._parentElement.insertAdjacentHTML('afterbegin', markup);
+  }
+
+  isEmpty(data) {
+    if (typeof data === 'object' && !data) return true;
+    if (data.length === 0) return true;
+
+    return false;
   }
 }

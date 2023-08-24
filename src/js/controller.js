@@ -27,12 +27,12 @@ const controlRecipes = async function () {
 
     resultsView.updateDOM(model.serachResultsPerPage(model.state.search.page));
     // Updating bookmarks for active bookmarks in list
-    bookmarksView.updateDOM(model.state.bookmarks);
     // Loading Recipe
     await model.loadRecipe(id);
 
     // Rendering Recipe
     recipeView.render(model.state.recipe);
+    bookmarksView.updateDOM(model.state.bookmarks);
   } catch (e) {
     console.log(e);
     recipeView.renderError();
@@ -100,8 +100,11 @@ const controlBookmarks = function () {
   // Rendering Bookmarks to bookmarktab
   bookmarksView.render(model.state.bookmarks);
 };
-
+const controlRenderBookmarks = function () {
+  bookmarksView.render(model.state.bookmarks);
+};
 const init = function () {
+  bookmarksView.addHandlerRender(controlRenderBookmarks);
   recipeView.addHandlerRender(controlRecipes);
   recipeView.addHandlerUpdateServings(controlServings);
   recipeView.addHandlerBookmarks(controlBookmarks);
