@@ -24,6 +24,8 @@ const controlRecipes = async function () {
 
     if (!id) return;
 
+    resultsView.updateDOM(model.serachResultsPerPage(model.state.search.page));
+
     // Loading Recipe
     await model.loadRecipe(id);
 
@@ -59,7 +61,6 @@ const controlSearchResults = async function () {
     // Loading Search Results from Model
     await model.loadSearchResults(query);
 
-    console.log(`New Search ${model.state.search.page}`);
     gotPage(model.state.search.page);
   } catch (e) {
     console.log(e);
@@ -81,7 +82,8 @@ const updateModelServings = function (servings) {
 const controlServings = function (servings) {
   model.updateServings(servings);
 
-  recipeView.render(model.state.recipe);
+  // recipeView.render(model.state.recipe);
+  recipeView.updateDOM(model.state.recipe);
 };
 
 // controllSearchResults();

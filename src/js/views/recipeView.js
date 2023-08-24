@@ -15,7 +15,9 @@ class RcipeView extends View {
   addHandlerUpdateServings(hanlder) {
     this._parentElement.addEventListener('click', function (e) {
       const btn = e.target.closest('.btn--tiny');
+      if (!btn) return;
       const updateTo = +btn.dataset.updateTo;
+
       if (updateTo > 0) hanlder(updateTo);
     });
   }
@@ -107,6 +109,7 @@ class RcipeView extends View {
     `;
   }
   _generateIngredientMarkup(ingredient) {
+    ingredient.quantity = Number(ingredient.quantity?.toFixed(4));
     return `
         <li class="recipe__ingredient">
             <svg class="recipe__icon">

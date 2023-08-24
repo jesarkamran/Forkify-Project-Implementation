@@ -16,7 +16,6 @@ class PaginationView extends View {
   }
 
   _generateMarkup(data) {
-    console.log(data);
     const prev = data.curr - 1;
     const next = data.curr + 1;
 
