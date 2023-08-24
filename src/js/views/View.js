@@ -20,9 +20,6 @@ export default class View {
 
   updateDOM(data) {
     this._data = data;
-    console.log('  ');
-    console.log(data);
-    console.log('  ');
     const markup = this._generateMarkup(this._data);
 
     const newDOM = document.createRange().createContextualFragment(markup);
@@ -43,8 +40,6 @@ export default class View {
           currElement.setAttribute(attri.name, attri.value)
         );
     });
-    console.log('  ');
-    console.log(this._data.servings);
   }
 
   renderSpinner() {
