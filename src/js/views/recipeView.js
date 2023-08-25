@@ -7,6 +7,8 @@ class RcipeView extends View {
   constructor() {
     super();
     this._parentElement = document.querySelector('.recipe');
+    this._errorMessage =
+      'Start by searching for a recipe or an ingredient. Have fun!';
   }
 
   addHandlerRender(hanlder) {
@@ -32,6 +34,7 @@ class RcipeView extends View {
   }
 
   _generateMarkup(recipe) {
+    if (window.location.href === '') throw new Error(this._errorMessage);
     return `
       <figure class="recipe__fig">
           <img src="${recipe.image}" alt="${

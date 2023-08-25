@@ -5,6 +5,7 @@ class ResultsView extends PreviewView {
   constructor() {
     super();
     this._parentElement = document.querySelector('.results');
+    this._errorMessage = 'No Results Were Found for your query :)';
   }
 }
 

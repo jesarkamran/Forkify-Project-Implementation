@@ -25,7 +25,7 @@ const controlRecipes = async function () {
 
     const id = window.location.hash.slice(1);
 
-    if (!id) return;
+    if (!id) throw new Error(recipeView.getErrorMessage());
 
     resultsView.updateDOM(model.serachResultsPerPage(model.state.search.page));
 

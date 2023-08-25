@@ -1,10 +1,11 @@
 import PreviewView from './previewView.js';
 
 class BookmarksView extends PreviewView {
-  _errorMessage = 'No bookmarks yet. Find a nice recipe and bookmark it :)';
   constructor() {
     super();
     this._parentElement = document.querySelector('.bookmarks__list');
+    this._errorMessage =
+      'No bookmarks yet. Find a nice recipe and bookmark it :)';
   }
 
   generateMarkup(data) {

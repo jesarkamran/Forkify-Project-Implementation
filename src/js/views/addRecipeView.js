@@ -7,6 +7,7 @@ class AddRecipeView extends View {
   _btnClose;
   constructor() {
     super();
+    this._errorMessage = 'InValid Data Entered!';
     this._parentElement = document.querySelector('.upload');
     this._overlay = document.querySelector('.overlay');
     this._window = document.querySelector('.add-recipe-window');

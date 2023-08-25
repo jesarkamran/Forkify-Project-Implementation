@@ -5,6 +5,7 @@ class PaginationView extends View {
   constructor() {
     super();
     this._parentElement = document.querySelector('.pagination');
+    this._errorMessage = 'Something went wrong!!';
   }
 
   addHandlerClick(handler) {

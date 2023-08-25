@@ -2,7 +2,7 @@ import icons from 'url:../../img/icons.svg';
 
 export default class View {
   _parentElement;
-  _errorMessage = 'No recipes found for your query.Please try again!';
+  _errorMessage;
   _successMessage;
 
   _data;
@@ -12,10 +12,7 @@ export default class View {
   }
 
   render(data) {
-    if (this.isEmpty(data)) {
-      this.renderError(this._errorMessage);
-      return;
-    }
+    if (this.isEmpty(data)) return this.renderError(this._errorMessage);
     this._data = data;
     this._clear();
     const markup = this._generateMarkup(this._data);
@@ -92,5 +89,9 @@ export default class View {
     if (data.length === 0) return true;
 
     return false;
+  }
+
+  getErrorMessage() {
+    return this._errorMessage;
   }
 }
