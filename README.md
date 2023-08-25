@@ -1,3 +1,3 @@
 # Forkify Project
 
-Recipe Application where user can read and add new Recipes
+### Recipe Application where user can read and add new Recipes
